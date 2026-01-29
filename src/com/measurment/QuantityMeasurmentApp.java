@@ -34,7 +34,6 @@ public class QuantityMeasurmentApp {
             return Double.hashCode(value);
         }
     }
-
     public boolean compareFeet(double d1, double d2) {
 
         if (Double.isNaN(d1) || Double.isNaN(d2)) {
@@ -51,21 +50,82 @@ public class QuantityMeasurmentApp {
 
         return f1.equals(f2);
     }
+//icheces start
+public static class Inches {
+
+    private final Double value1;
+
+    public Inches(Double value1) {
+        if(value1 == null){
+
+            throw new IllegalArgumentException("value can not be null");
+        }
+        if (Double.isNaN(value1) || Double.isInfinite(value1)) {
+
+            throw new IllegalArgumentException("invalid numberic value");
+        }
+
+        this.value1 = value1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+
+        Inches oth = (Inches) obj;
+
+        return Double.compare(this.value1, oth.value1) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(value1);
+    }
+}
+
+    public boolean compareInches(double d1, double d2) {
+
+        if (Double.isNaN(d1) || Double.isNaN(d2)) {
+
+            throw new IllegalArgumentException("invalid numbers : NaN not allowed");
+        }
+
+        if (Double.isInfinite(d1) || Double.isInfinite(d2)) {
+
+            throw new IllegalArgumentException("invalid numbers : infinite values not allowed");
+        }
+        Inches i1 = new Inches(d1);
+        Inches i2 = new Inches(d2);
+
+        return i1.equals(i2);
+    }
+//inches  end
+
 
 
     public static void main(String[] args) {
 
-
+//     feet
         double feet1 = 12.0;
         double feet2 = 12.0;
 
 
         QuantityMeasurmentApp measurmentApp = new QuantityMeasurmentApp();
 
-        boolean result = measurmentApp.compareFeet(feet1, feet2);
+        boolean feetResult = measurmentApp.compareFeet(feet1, feet2);
 
-        System.out.println("Are both values equal   ==  " + result);
+        System.out.println("Are both Feet values is equal   ==  " + feetResult);
+
+        //     inches
+
+        double inches1 = 12.0;
+        double inches2 = 12.0;
 
 
+
+        boolean inchesResult = measurmentApp.compareInches(inches1,inches2);
+
+        System.out.println("Are both Inches values is equal   ==  " + inchesResult);
     }
 }
