@@ -21,15 +21,15 @@ public class Length {
         this.unit = unit;
     }
 
-    private double convertToBaseUnit() {
+    private double convertToInches() {
 
-        return unit.toBaseUnit(value);
+        return unit.toInches(value);
     }
 
     public boolean compare(Length other) {
 
         if (other == null) return false;
-        return Double.compare(this.convertToBaseUnit(), other.convertToBaseUnit()) == 0;
+        return Double.compare(this.convertToInches(), other.convertToInches()) == 0;
     }
 
     @Override
@@ -37,13 +37,13 @@ public class Length {
         if (this == obj) return true;
         if (obj == null || this.getClass() != obj.getClass()) return false;
         Length oth = (Length) obj;
-
-        return compare(oth);
+        double epsilion=0.0001;
+        return Math.abs(this.convertToInches()-oth.convertToInches())<epsilion;
     }
 
     @Override
     public int hashCode() {
-        return Double.hashCode(convertToBaseUnit());
+        return Double.hashCode(convertToInches());
     }
 }
 

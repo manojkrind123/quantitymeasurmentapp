@@ -6,8 +6,9 @@ import com.measurment.LengthUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class QuantityMeasurmentAppUc3Test {
+public class QuantityMeasurmentAppUc4Test {
 
+//    feet and iNches value
     @Test
     public void testFeetAndInchesEquality_SameValue() {
 
@@ -16,6 +17,16 @@ public class QuantityMeasurmentAppUc3Test {
         Assertions.assertTrue(foot.equals(tweleveInches));
 
     }
+    //    yard and centemeter value
+    @Test
+    public void testFeetAndYardEquality_SameValue() {
+
+        Length yard = new Length(1.0, LengthUnit.YARDS);
+        Length foot = new Length(3.0, LengthUnit.FEET);
+        Assertions.assertTrue(yard.equals(foot));
+
+    }
+//    same value feet
 
     @Test
     public void testFeetEquality_sameValue() {
@@ -25,6 +36,7 @@ public class QuantityMeasurmentAppUc3Test {
         Assertions.assertTrue(foot1.equals(foot2));
 
     }
+//    diffrent value inches
 
     @Test
     public void testInchesEquality_DiffrentValue() {
