@@ -13,13 +13,14 @@ public enum LengthUnit {
         this.toInchesFactor = toInchesFactor;
     }
 
-    public double toInches(double value) {
+    public double toBaseUnit(double value) {
 
        return value * toInchesFactor;
     }
 
-    public double fromInches(double inches) {
+    public double fromBaseUnit(double baseValue) {
 
-        return inches / toInchesFactor;
+        return baseValue / toInchesFactor;
     }
+
 }

@@ -21,39 +21,38 @@ public class Length {
         this.value = value;
         this.unit = unit;
     }
-    private double toBaseUnit() {
-
-        return unit.toInches(value);
+    private double getValue(){
+        return value;
     }
-    public Length convertTo(LengthUnit targetUnit){
-        if (targetUnit == null) {
 
-            throw new IllegalArgumentException("targetUnit can not be null");
-        }
-        double inches = this.toBaseUnit();
-        double convertedValue = targetUnit.fromInches(inches);
-        return new Length(convertedValue, targetUnit);
+    public LengthUnit getUnit() {
+        return unit;
     }
+    // add two length
+    public Length add(Length other){
+        double baseSum= this.unit.toBaseUnit(this.value)+
+                other.unit.toBaseUnit(other.value);
+        double resultValue = this.unit.fromBaseUnit(baseSum);
+        return new Length(round(resultValue),this.unit);
+    }
+    private double round(double value ){
+        return Math.round(value * 100) / 100.0;
+    }
+
 
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+        //if (this == obj) return true;
         if (!(obj instanceof Length)) return false;
         Length oth = (Length) obj;
-        double epsilion=0.0001;
-        return Math.abs(this.toBaseUnit()-oth.toBaseUnit())<epsilion;
-    }
-
-    @Override
-    public int hashCode() {
-        return Double.hashCode(toBaseUnit());
-
+        //double epsilion=0.0001;
+        return Math.abs(this.unit.toBaseUnit(this.value)-
+                oth.unit.toBaseUnit(oth.value))< 0.0001;
     }
 
     @Override
     public String toString() {
-        return String.format("%.2f %s",value,unit);
+        return value + " ," + unit;
     }
 }
-
