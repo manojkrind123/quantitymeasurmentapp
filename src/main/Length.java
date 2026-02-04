@@ -21,7 +21,7 @@ public class Length {
         this.value = value;
         this.unit = unit;
     }
-    private double getValue(){
+    public double getValue(){
         return value;
     }
 
