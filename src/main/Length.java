@@ -29,30 +29,29 @@ public class Length {
         return unit;
     }
     // add two length
-    public Length add(Length other){
+    public Length add(Length other, LengthUnit targetUnit){
+        if (other == null || targetUnit== null){
+            throw new IllegalArgumentException("invalid input");
+        }
         double baseSum= this.unit.toBaseUnit(this.value)+
                 other.unit.toBaseUnit(other.value);
-        double resultValue = this.unit.fromBaseUnit(baseSum);
-        return new Length(round(resultValue),this.unit);
+        double targetValue = targetUnit.fromBaseUnit(baseSum);
+        return new Length(round(targetValue),targetUnit);
     }
     private double round(double value ){
         return Math.round(value * 100) / 100.0;
     }
-
-
-
     @Override
     public boolean equals(Object obj) {
-        //if (this == obj) return true;
         if (!(obj instanceof Length)) return false;
         Length oth = (Length) obj;
-        //double epsilion=0.0001;
-        return Math.abs(this.unit.toBaseUnit(this.value)-
-                oth.unit.toBaseUnit(oth.value))< 0.0001;
+        double thisBase = unit.toBaseUnit(value);
+        double otherBase = oth.unit.toBaseUnit(oth.value);
+        return Math.abs(thisBase-otherBase)< 0.0001;
     }
 
     @Override
     public String toString() {
-        return value + " ," + unit;
+        return "Qunatity("+ value +  " ," + unit +")";
     }
 }
