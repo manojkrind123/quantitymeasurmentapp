@@ -2,25 +2,25 @@ package main;
 
 public enum LengthUnit {
 
-    FEET(12.0),
-    INCHES( 1.0),
-    YARDS(36.0),
-    CENTEMETERS(0.393701);
-    private final double toInchesFactor;
+    FEET(1.0),
+    INCHES( 1.0 / 12.0),
+    YARDS(3.0),
+    CENTEMETERS(0.0328084);
+    private final double toFeetFactor;
 
-    LengthUnit(double toInchesFactor) {
+    LengthUnit(double toFeetFactor) {
 
-        this.toInchesFactor = toInchesFactor;
+        this.toFeetFactor = toFeetFactor;
     }
 
-    public double toBaseUnit(double value) {
+    public double convertToBaseUnit(double value) {
 
-       return value * toInchesFactor;
+       return value * toFeetFactor;
     }
 
-    public double fromBaseUnit(double baseValue) {
+    public double convertFromBaseUnit(double baseValue) {
 
-        return baseValue / toInchesFactor;
+        return baseValue / toFeetFactor;
     }
 
 }
