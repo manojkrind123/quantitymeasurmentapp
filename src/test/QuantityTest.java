@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class QuantityTest {
 
-    // ---------- 1. Length Equality ----------
+    // ---------- 1. Length Equality Test ----------
 
     @Test
     void testGenericQuantity_LengthOperations_Equality() {
