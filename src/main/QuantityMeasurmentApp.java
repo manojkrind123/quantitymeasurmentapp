@@ -45,6 +45,20 @@ public class QuantityMeasurmentApp {
 
         Quantity<WeightUnit> someWeightfor = demonstrateAddtion1(weightInKg, weightInPonds, WeightUnit.POUND);
         System.out.println(someWeightfor.getValue() + "     unit " + someWeightfor.getUnit());
-
+ // UC11 - Volume
+        Quantity<VolumeUnit> volume1 =
+                new Quantity<>(1.0, VolumeUnit.LITRE);
+        Quantity<VolumeUnit> volume2 =
+                new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
+        Quantity<VolumeUnit> volume3 =
+                new Quantity<>(1.0, VolumeUnit.GALLON);
+// Equality
+        System.out.println(volume1.equals(volume2)); // true
+// Conversion
+        System.out.println(volume3.converTo(VolumeUnit.LITRE)); // 3.78541
+// Addition
+        Quantity<VolumeUnit> sum =
+                volume1.add(volume3, VolumeUnit.LITRE);
+        System.out.println(sum.getValue()); // 4.78541
     }
 }

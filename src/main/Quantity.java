@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Quantity<U extends IMeasurable> {
 
-    private static final double EPLISION = 1e-9;
+    private static final double EPLISION = 0.0001;
     private double value;
     private U unit;
 
