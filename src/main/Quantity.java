@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Quantity<U extends IMeasurable> {
 
-    private static final double EPLISION = 0.0001;
+    private static final double EPLISION = 1e-6;
     private double value;
     private U unit;
 
     public Quantity(double value, U unit) {
         if (unit == null) {
-            throw new IllegalArgumentException("unit can not be null");
+            throw new IllegalArgumentException("other can not be null");
         }
         if (Double.isNaN(value) || Double.isInfinite(value)) {
             throw new IllegalArgumentException("invalid numeric value");
@@ -71,6 +71,67 @@ public class Quantity<U extends IMeasurable> {
         double result = targetUnit.convertFromBaseUnit(sumBase);
         return new Quantity<>(result, targetUnit);
     }
+    //substract
+    public Quantity<U> substract(Quantity<?> other) {
+
+        if (other == null) {
+            throw new IllegalArgumentException("targetUnit can not be null");
+        }
+
+        if (unit.getClass() != other.unit.getClass()) {
+            throw new IllegalArgumentException("incompatible unit type- cross unit");
+        }
+        Quantity<U> typeOther = (Quantity<U>) other;
+        double base1 = unit.convertToBaseUnit(value);
+        double base2 = typeOther.unit.convertToBaseUnit(typeOther.value);
+        double sumBase = base1 - base2;
+        double result = unit.convertFromBaseUnit(sumBase);
+        return new Quantity<>(result, unit);
+    }
+
+    public Quantity<U> substract(Quantity<U> other, U targetUnit) {
+
+        if (other == null || targetUnit == null) {
+            throw new IllegalArgumentException("targetUnit can not be null");
+        }
+
+        if (unit.getClass() != other.unit.getClass() || unit.getClass() != targetUnit.getClass()) {
+            throw new IllegalArgumentException("incompetable unit type");
+        }
+        double base1 = unit.convertToBaseUnit(value);
+        double base2 = other.unit.convertToBaseUnit(other.value);
+        double diff = base1 - base2;
+        double result = targetUnit.convertFromBaseUnit(diff);
+        return new Quantity<>(result, targetUnit);
+    }
+
+
+
+    //substract end
+
+    //Divide
+    public double divide(Quantity<?> other) {
+
+        if (other == null) {
+            throw new IllegalArgumentException("targetUnit can not be null");
+        }
+
+        if (unit.getClass() != other.unit.getClass()) {
+            throw new IllegalArgumentException("incompatible unit type");
+        }
+        double base1 = unit.convertToBaseUnit(value);
+        double base2 = other.unit.convertToBaseUnit(other.value);
+        if(Math.abs(base2)< EPLISION){
+
+            throw new ArithmeticException("division by Zero");
+        }
+        return  base1 / base2 ;
+    }
+
+    //Divede end
+
+
+
 
     @Override
     public boolean equals(Object obj) {

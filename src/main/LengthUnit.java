@@ -31,5 +31,4 @@ public enum LengthUnit implements IMeasurable
 
         return baseValue / conversionFactor;
     }
-
 }

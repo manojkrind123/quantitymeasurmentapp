@@ -32,6 +32,5 @@ public enum WeightUnit implements IMeasurable {
     public double convertFromBaseUnit(double baseValue) {
 
         return baseValue / conversionFactor;
-
     }
 }
